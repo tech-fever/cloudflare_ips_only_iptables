@@ -8,12 +8,14 @@ if [ -z "$1" ]; then
     echo "nginx_conf is null"
     exit 1
 fi
-# 配置文件是否存在
+# 配置文件路径是否存在
 nginx_conf=$1
-if [ ! -f $1 ]; then
-    echo "nginx配置文件路径不存在"
+if [ ! -d "$nginx_conf" ]; then
+    echo $nginx_conf "not exist"
+    echo "nginx_conf does not exist"
     exit 1
 fi
+
 restore_real_ip_config_file="restore_real_ip.conf"
 
 config_file_full_path="${nginx_conf}/${restore_real_ip_config_file}"
