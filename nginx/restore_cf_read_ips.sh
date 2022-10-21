@@ -3,6 +3,11 @@
 
 # 读取命令行参数中的nginx配置文件路径
 nginx_conf=$1
+# nginx_conf不存在就退出
+if [ ! -f $nginx_conf ]; then
+    echo "nginx配置文件路径不存在"
+    exit 1
+fi
 restore_real_ip_config_file="restore_real_ip.conf"
 
 config_file_full_path="${nginx_conf}/${restore_real_ip_config_file}"
@@ -18,3 +23,8 @@ echo "" >> config_file_full_path;
 echo "# use any of the following two" >> config_file_full_path;
 echo "real_ip_header CF-Connecting-IP;" >> config_file_full_path;
 echo "#real_ip_header X-Forwarded-For;" >> config_file_full_path;
+
+# 结束
+echo "恢复cloudflare的真实ip成功"
+# 文件路径为
+echo "文件路径为：${config_file_full_path}"
