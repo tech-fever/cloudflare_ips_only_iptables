@@ -2,9 +2,15 @@
 # nginx 恢复cloudflare的真实ip
 
 # 读取命令行参数中的nginx配置文件路径
+
+# nginx_conf 为空就退出
+if [ -z "$1" ]; then
+    echo "nginx_conf is null"
+    exit 1
+fi
+# 配置文件是否存在
 nginx_conf=$1
-# nginx_conf不存在就退出
-if [ ! -f $nginx_conf ]; then
+if [ ! -f $1 ]; then
     echo "nginx配置文件路径不存在"
     exit 1
 fi
