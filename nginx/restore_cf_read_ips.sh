@@ -7,9 +7,12 @@
 if [ -z "$1" ]; then
     echo "nginx_conf is null"
     nginx_conf="/etc/nginx/conf.d"
+else
+    nginx_conf=$1
 fi
+echo "nginx_conf is $nginx_conf"
 # 配置文件路径是否存在
-nginx_conf=$1
+
 if [ ! -d "$nginx_conf" ]; then
     echo $nginx_conf "not exist"
     echo "nginx_conf does not exist"
