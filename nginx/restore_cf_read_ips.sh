@@ -3,10 +3,10 @@
 
 # 读取命令行参数中的nginx配置文件路径
 
-# nginx_conf 为空就退出
+# nginx_conf 为空就使用默认路径
 if [ -z "$1" ]; then
     echo "nginx_conf is null"
-    exit 1
+    nginx_conf="/etc/nginx/conf.d"
 fi
 # 配置文件路径是否存在
 nginx_conf=$1
@@ -36,3 +36,7 @@ echo "#real_ip_header X-Forwarded-For;" >> $config_file_full_path;
 echo "恢复cloudflare的真实ip成功"
 # 文件路径为
 echo "文件路径为：${config_file_full_path}"
+
+# nginx reload
+echo "重启nginx"
+nginx -t && nginx -s reload
